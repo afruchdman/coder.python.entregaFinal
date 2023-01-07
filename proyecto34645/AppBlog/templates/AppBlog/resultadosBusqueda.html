@@ -1,0 +1,28 @@
+{% extends "AppBlog/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5">resultados de la busqueda de DOCTORES</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+
+{% if cursos %}
+
+<h2>LISTADO DE DOCTORES</h2>
+{% for doctor in doctores %}
+
+<h3>{{ doctor.nombre }} - {{ doctor.apellido }}</h3>
+
+{% endfor %}
+
+{% else %}
+
+<h2>NO HAY Doctores</h2>
+
+{% endif %}
+
+
+
+{% endblock %}

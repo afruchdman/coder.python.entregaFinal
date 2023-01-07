@@ -1,0 +1,52 @@
+{% extends "AppBlog/padre.html" %}
+
+{% load static %}
+
+{% block header %} 
+<header class="masthead" style="background-image: url({% static 'assets/img/post-bg.jpg'%}">
+{% endblock %}
+
+{% block titulo %}
+<h1 class="mb-5">{{ tema }}</h1>
+<span class="subheading">{{ descripcion }}</span>
+<h1 class="mb-5"></h1>
+{% endblock %}
+
+
+{% block contenido_que_cambia %}
+<hr>
+<form action="{% url 'blogs'%}" method="POST"> {% csrf_token %}
+    <div class="input-group mb-3">
+        {{ form.as_div}}
+    <input class="btn btn-success" type="submit" value="Crear nuevo Blog">
+    </div>
+</form>
+<hr>
+
+<h3>{{ mensaje }}</h3>
+
+{% if posteos %}
+
+<h2>Lista de Posteos</h2>
+<table class="table table-success table-striped justify-content-md-center">
+    <th>#</th><th>Titulo</th><th>subtitulo</th><th>cuerpo</th><th>autor</th><th>fecha</th><th>pagina</th>
+    {% for post in posteos %}
+    <tr>
+        <td>{{ post.id }}</td>
+        <td>{{ post.titulo }}</td>
+        <td>{{ post.subtitulo }}</td>
+        <td>{{ post.cuerpo }}</td>
+        <td>{{ post.autor }}</td>
+        <td>{{ post.fecha }}</td>
+        <td>{{ post.pagina_id }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<h3>NO hay posteos</h3>
+{% endif %}
+
+
+
+{% endblock %}
+

@@ -1,0 +1,29 @@
+{% extends "AppBlog/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5">FORMULARIO DE ANIMALES</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+
+<h3>{{ mensaje }}</h3>
+
+<form action="{% url 'animales' %}" method="POST"> {% csrf_token %}
+    
+    <table>
+
+        {{ form.as_table }}
+    
+    </table>
+
+    <input type="submit" value="Guardar animales">
+
+
+
+
+</form>
+
+
+{% endblock %}

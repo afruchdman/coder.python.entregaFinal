@@ -1,0 +1,22 @@
+{% extends "AppBlog/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5">FORMULARIO DE BUSQUEDA DE DOCTORES</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+
+<h3>{{ mensaje }}</h3>
+
+<form action="{% url 'buscar' %}" method="GET"> 
+
+    <input type="text" name="doctor" id="doctor" placeholder="DOCTOR">
+
+    <input type="submit" value="buscar doctor">
+
+
+</form>
+
+{% endblock %}
