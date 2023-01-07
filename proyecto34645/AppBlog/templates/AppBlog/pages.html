@@ -28,12 +28,14 @@
 {% if paginas %}
 
 <table class="table table-success table-striped justify-content-md-center">
-    <th>#</th><th>Tema</th><th>Descripcion</th>
+    <th>#</th><th>Tema</th><th>Descripcion</th><th>Editar</th><th>Eliminar</th>
     {% for pagina in paginas %}
     <tr>
         <td><a href="{% url 'blogs' %}?pagina_id={{ pagina.id }}&tema={{ pagina.tema }}&descripcion={{ pagina.descripcion }}">#{{ pagina.id }}</a></td>
         <td>{{ pagina.tema }}</td>
         <td>{{ pagina.descripcion }}</td>
+        <td><a href="{% url 'editarPage' pagina.id %}">editar</a></td>
+        <td><a href="{% url 'deletePage' pagina.id %}">eliminar</a></td>
     </tr>
     {% endfor %}
 </table>

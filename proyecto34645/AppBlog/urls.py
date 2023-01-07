@@ -9,8 +9,6 @@ urlpatterns = [
     path("pages/", paginas, name="pages"),
     path("acercade/", acercade, name="acercade"),
     path("blogs/", posteos, name="blogs"),
-    #path("veterinarias/", veterinarias, name="veterinarias"),
-    #path("busquedaDoctores/", busquedaDoctores, name="busquedaDoctores"),
-    #path("buscar/", buscar, name="buscar"),
-
+    path("editarPage/<id>", editarPagina, name="editarPage"),
+    path("deletePage/<id>", eliminarPagina, name="deletePage"),
 ]

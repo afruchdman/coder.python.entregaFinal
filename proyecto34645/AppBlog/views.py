@@ -72,72 +72,33 @@ def posteos(request):
             return render(request, "AppBlog/blogs.html",  {"form": form,"posteos": posteos,"descripcion":request.GET['descripcion'],"tema":request.GET['tema'] ,"origen":request.GET['pagina_id']})
 
 
-####################################################
 
 
-# Create your views here.
-def doctores(request):
+
+def leerPaginas(request):
+    p=pages.objects.all()
+    return render(request, "AppBlog/editarPage.html", {"pages": p})
+
+def eliminarPagina(request, id):
+    p=pages.objects.get(id=id)
+    p.delete()
+    p=pages.objects.all()
+    return render(request, "AppBlog/pages.html", {"paginas": p, "mensaje": "Pagina eliminado correctamente"})
+
+def editarPagina(request, id):
+    p=pages.objects.get(id=id)
     if request.method=="POST":
-        form= doctorForm(request.POST)
-        
+        form= pagesForm(request.POST)
         if form.is_valid():
             informacion=form.cleaned_data
-            nombre= informacion["nombre"]
-            apellido= informacion["apellido"]
-            email= informacion["email"]
-            doc= doctor(nombre=nombre, apellido=apellido, email=email)
-            doc.save()
-            return render(request, "AppBlog/inicio.html" ,{"mensaje": "Doctor guardado correctamente"})
-        else:
-            return render(request, "AppBlog/doctores.html" ,{"form": form, "mensaje": "Informacion no valida"})
-        
+            #id=informacion["id"]
+            p.tema= informacion["tema"]
+            p.descripcion= informacion["descripcion"]
+            p.save()
+            return render(request, "AppBlog/editarPage.html" ,{"pagina":p, "mensaje": "Pagina editado correctamente"})
+        pass
     else:
-        formulario= doctorForm()
-        return render (request, "AppBlog/doctores.html", {"form": formulario})
+        form= pagesForm(initial={"tema":p.tema, "descripcion":p.descripcion})
+        return render(request, "AppBlog/editarPage.html", {"form": form, "pagina": p})
 
-def animales(request):
-    if request.method=="POST":
-        form= animalForm(request.POST)
-        
-        if form.is_valid():
-            informacion=form.cleaned_data
-            nombre= informacion["nombre"]
-            especie= informacion["especie"]
-            anim= animal(nombre=nombre, especie=especie)
-            anim.save()
-            return render(request, "AppBlog/inicio.html" ,{"mensaje": "Animal guardado correctamente"})
-        else:
-            return render(request, "AppBlog/animales.html" ,{"form": form, "mensaje": "Informacion no valida"})
-        
-    else:
-        formulario= animalForm()
-        return render (request, "AppBlog/animales.html", {"form": formulario})
-
-def veterinarias(request):
-    if request.method=="POST":
-        form= veterinariaForm(request.POST)
-        
-        if form.is_valid():
-            informacion=form.cleaned_data
-            nombre= informacion["nombre"]
-            direccion= informacion["direccion"]
-            vet= veterinaria(nombre=nombre, direccion=direccion)
-            vet.save()
-            return render(request, "AppBlog/inicio.html" ,{"mensaje": "Veterinaria guardado correctamente"})
-        else:
-            return render(request, "AppBlog/veterinarias.html" ,{"form": form, "mensaje": "Informacion no valida"})
-        
-    else:
-        formulario= veterinariaForm()
-        return render (request, "AppBlog/veterinarias.html", {"form": formulario})
-
-def busquedaDoctores(request):
-    return render(request, "AppBlog/busquedaDoctores.html")
-
-def buscar(request):    
-    doctor= request.GET["doctor"]
-    if doctor!="":
-        doctor= doctor.objects.filter(nombre__icontains=str(doctor) )
-        return render(request, "AppBlog/resultadosBusqueda.html", {"nombre": doctor})
-    else:
-        return render(request, "AppBlog/busquedaDoctores.html", {"mensaje": "Che Ingresa un doctor para buscar!"})
+ 

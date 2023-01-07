@@ -1,0 +1,20 @@
+{% extends "AppBlog/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5">EDITANDO Pagina: {{ pagina }} </h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+
+<h3>{{ mensaje }}</h3>
+<form action="{% url 'editarPage' pagina.id %}" method="POST"> {% csrf_token %}
+    <table>
+        {{ form.as_p }}
+    </table>
+    <input type="submit" value="Guardar Cambios">
+</form>
+
+
+{% endblock %}
