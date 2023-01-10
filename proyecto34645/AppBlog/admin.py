@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import *
+
+admin.site.register(pages)
+admin.site.register(blogs)
+admin.site.register(Avatar)
