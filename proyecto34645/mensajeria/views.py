@@ -10,13 +10,10 @@ from django.contrib.auth import login, authenticate
 
 
 def leer(request):
-    receptor= request.user
-    print("recept="+str(receptor))
-    if receptor!="":
-        print("entro")
-        m= msg.objects.filter(emisor=str(receptor) )
-        print(len(m))
-        return render(request, "mensajeria/mensajes.html", {"mensajes": m})
+    print(request.user)
+    m= msg.objects.filter(receptor=request.user )
+    print(len(m))
+    return render(request, "mensajeria/mensajes.html", {"mensajes": m})
 
 def enviar(request):
     print(request.method)
@@ -34,7 +31,7 @@ def enviar(request):
             print(request.user)
             m= msg(msg=mensage, emisor=emisor, receptor=receptor,leido=bool(leido))
             m.save()
-            return render(request, "mensajeria/enviar.html" ,{"mensaje": "mensaje enviado","form": form})
+            return render(request, "mensajeria/enviar.html" ,{"mensaje": "mensaje enviado a " +  receptor  ,"form": form})
         else:
             return render(request, "mensajeria/enviar.html" ,{"form": form, "mensaje": "mensaje mal formado"})
         
