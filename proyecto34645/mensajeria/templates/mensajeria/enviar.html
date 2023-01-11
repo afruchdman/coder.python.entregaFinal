@@ -13,8 +13,12 @@
 <form action="{% url 'enviar' %}" method="POST"> {% csrf_token %}
     
     <table>
+        
+        <tr>
+            <th>¿Para quien es tu Mensaje?</th><td>{{ form.receptor }}</td>
+            <th>¿Que queres decirle?</th><td>{{ form.msg }}</td>
+        </tr>
 
-        {{ form.as_table }}
     
     </table>
 
