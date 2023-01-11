@@ -17,7 +17,7 @@
 <hr>
 <form action="{% url 'blogs'%}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
     <div class="input-group mb-3">
-        {{ form.as_div}}
+        {{ form.as_p}}
     <input class="btn btn-success" type="submit" value="Crear nuevo Blog">
     </div>
 </form>

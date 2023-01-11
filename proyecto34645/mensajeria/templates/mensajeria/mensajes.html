@@ -10,12 +10,19 @@
 
 {% if mensajes %}
 
-<h2>Tus mensajes</h2>
-{% for mensaje in mensajes %}
+<table class="table table-success table-striped justify-content-md-center">
+    <th>#</th><th>Emisor</th><th>Receptor</th><th>Leido?</th><th>Mensaje</th>
+    {% for mensaje in mensajes %}
+    <tr>        
+        <td>{{ mensaje.id }}</td>
+        <td>{{ mensaje.emisor }}</td>
+        <td>{{ mensaje.receptor }}</td>
+        <td>{{ mensaje.leido }}</td>
+        <td>{{ mensaje.msg }}</td>
+    </tr>
+    {% endfor %}
+</table>
 
-<h3>{{ mensaje.msg }} - {{ mensaje.emisor }}</h3>
-
-{% endfor %}
 
 {% else %}
 

@@ -10,7 +10,10 @@ from django.contrib.auth.models import User
 class blogForm(forms.Form):
     titulo=forms.CharField(label="titulo",max_length=50)
     subtitulo=forms.CharField(label="subtitulo",max_length=256,required=False)
-    cuerpo=forms.CharField(label="cuerpo",max_length=1024,required=False)
+    cuerpo=forms.CharField(widget=forms.Textarea(attrs={
+        'rows' : 4,
+        'class' : 'answers',
+        }))
     autor=forms.CharField(label="autor",max_length=50,required=False)
     fecha =forms.DateField (label="fecha",required=False)
     imagen =forms.ImageField(label="imagen",required=False)
