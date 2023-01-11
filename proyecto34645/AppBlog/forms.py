@@ -16,7 +16,7 @@ class blogForm(forms.Form):
         }))
     autor=forms.CharField(label="autor",max_length=50,required=False)
     fecha =forms.DateField (label="fecha",required=False)
-    imagen =forms.ImageField(label="imagen",required=False)
+    imagen =forms.ImageField(  label="imagen",required=False)
     pagina_id = forms.IntegerField ()
 
 

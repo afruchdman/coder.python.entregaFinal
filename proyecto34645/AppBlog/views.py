@@ -56,8 +56,10 @@ def posteos(request):
             autor= informacion["autor"]
             fecha= informacion["fecha"]
             imagen= informacion["imagen"]
+            if informacion["imagen"] == None:
+                imagen="/static/assets/img/default.jpg"
             pagina_id=informacion["pagina_id"]
-            b= blogs( imagen=imagen,titulo=titulo, subtitulo=subtitulo, cuerpo=cuerpo, autor=autor, fecha=fecha,pagina_id=pagina_id)
+            b= blogs( imagen=imagen,titulo=titulo, subtitulo=subtitulo, cuerpo=cuerpo, autor=autor, fecha=fecha, pagina_id=pagina_id)
             b.save()
             posteos=blogs.objects.filter(pagina_id=pagina_id)
             return render(request, "AppBlog/blogs.html" ,{"form": form,"posteos": posteos})

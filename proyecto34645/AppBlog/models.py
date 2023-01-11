@@ -18,7 +18,7 @@ class blogs(models.Model):
     cuerpo=models.CharField(max_length=1024,null=True)
     autor=models.CharField(max_length=50,null=True)
     fecha =models.DateField(null=True)
-    imagen =models.CharField(max_length=500,null=True,default="/static/assets/img/default.jpg")
+    imagen =models.CharField(max_length=500,null=True)
     pagina_id = models.IntegerField(null=True)
     #p = models.ForeignKey(pages, on_delete=models.CASCADE,null=True)
     def __str__(self):
