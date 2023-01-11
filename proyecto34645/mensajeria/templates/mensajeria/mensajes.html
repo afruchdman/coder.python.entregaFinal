@@ -1,0 +1,28 @@
+{% extends "mensajeria/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5">Tus Mensajes</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+
+{% if mensajes %}
+
+<h2>Tus mensajes</h2>
+{% for mensaje in mensajes %}
+
+<h3>{{ mensaje.msg }} - {{ mensaje.emisor }}</h3>
+
+{% endfor %}
+
+{% else %}
+
+<h2>NO HAY MENSAJES para vos</h2>
+
+{% endif %}
+
+
+
+{% endblock %}

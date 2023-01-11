@@ -1,5 +1,4 @@
 from django.shortcuts import render
-
 from .models import *
 from django.http import HttpResponse
 from django.urls import reverse_lazy
@@ -109,7 +108,6 @@ def editarPagina(request, id):
 
 #-----------------
 def login_request(request):
-
     if request.method=="POST":
         form = AuthenticationForm(request, data=request.POST )
         if form.is_valid:

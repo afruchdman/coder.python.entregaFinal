@@ -1,0 +1,29 @@
+{% extends "mensajeria/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5">FORMULARIO DE mensajeria</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+{% if mensaje != "" %}
+<script>alert('{{ mensaje }}');</script>
+{% endif %}
+<form action="{% url 'enviar' %}" method="POST"> {% csrf_token %}
+    
+    <table>
+
+        {{ form.as_table }}
+    
+    </table>
+
+    <input type="submit" value="ENVIAR">
+
+
+
+
+</form>
+
+
+{% endblock %}
