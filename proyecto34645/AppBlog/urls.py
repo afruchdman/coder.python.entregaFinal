@@ -1,6 +1,8 @@
-from django.urls import path
-from .views import *
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib.auth.views import LogoutView
+from .views import *
 
 
 
@@ -18,5 +20,4 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('logout/', LogoutView.as_view(template_name='AppBlog/logout.html'), name='logout'),
     path('editarPerfil/', editarPerfil, name='editarPerfil'),
-    path('agregarAvatar/', agregarAvatar, name='agregarAvatar'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

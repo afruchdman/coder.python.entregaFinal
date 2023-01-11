@@ -15,7 +15,7 @@
 
 {% block contenido_que_cambia %}
 <hr>
-<form action="{% url 'blogs'%}" method="POST"> {% csrf_token %}
+<form action="{% url 'blogs'%}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
     <div class="input-group mb-3">
         {{ form.as_div}}
     <input class="btn btn-success" type="submit" value="Crear nuevo Blog">
@@ -31,8 +31,10 @@
 <table class="table table-success table-striped justify-content-md-center">
     <th>#</th><th>Titulo</th><th>subtitulo</th><th>cuerpo</th><th>autor</th><th>fecha</th><th>pagina</th>
     {% for post in posteos %}
+
+
     <tr>
-        <td>{{ post.id }}</td>
+        <td><img src="{{ post.imagen }}"></td>
         <td>{{ post.titulo }}</td>
         <td>{{ post.subtitulo }}</td>
         <td>{{ post.cuerpo }}</td>

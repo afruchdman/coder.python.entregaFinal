@@ -49,7 +49,6 @@ def posteos(request):
     if request.method=="POST":
         form= blogForm(request.POST)
         if form.is_valid():
-            print(1)
             informacion=form.cleaned_data
             #id=informacion["id"]
             titulo= informacion["titulo"]
@@ -57,16 +56,15 @@ def posteos(request):
             cuerpo= informacion["cuerpo"]
             autor= informacion["autor"]
             fecha= informacion["fecha"]
+            imagen= informacion["imagen"]
             pagina_id=informacion["pagina_id"]
-            b= blogs(titulo=titulo, subtitulo=subtitulo, cuerpo=cuerpo, autor=autor, fecha=fecha,pagina_id=pagina_id)
+            b= blogs( imagen=imagen,titulo=titulo, subtitulo=subtitulo, cuerpo=cuerpo, autor=autor, fecha=fecha,pagina_id=pagina_id)
             b.save()
             posteos=blogs.objects.filter(pagina_id=pagina_id)
             return render(request, "AppBlog/blogs.html" ,{"form": form,"posteos": posteos})
         else:
-            print(2)
             return render(request, "AppBlog/blogs.html" ,{"form": form, "mensaje": "Informacion no valida"}) 
     else:
-        print(3)
         form= blogForm()
         print("id"+request.GET['pagina_id']) 
         if request.GET['pagina_id']== "":
@@ -165,17 +163,3 @@ def editarPerfil(request):
         formulario=UserEditForm(instance=usuario)
     return render(request, 'AppBlog/editarPerfil.html', {'formulario':formulario, 'usuario':usuario.username})
     
-@login_required
-def agregarAvatar(request):
-    if request.method == 'POST':
-        formulario=AvatarForm(request.POST, request.FILES)
-        if formulario.is_valid():
-            avatarViejo=Avatar.objects.get(user=request.user)
-            if(avatarViejo.imagen):
-                avatarViejo.delete()
-            avatar=Avatar(user=request.user, imagen=formulario.cleaned_data['imagen'])
-            avatar.save()
-            return render(request, 'AppBlog/inicio.html', {'usuario':request.user, 'mensaje':'AVATAR AGREGADO EXITOSAMENTE'})
-    else:
-        formulario=AvatarForm()
-    return render(request, 'AppBlog/agregarAvatar.html', {'formulario':formulario, 'usuario':request.user})

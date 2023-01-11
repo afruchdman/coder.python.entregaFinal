@@ -2,6 +2,10 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+#from _ckeditor.fields import RichTextFormField
+#from _ckeditor.widgets import CKEditorWidget
+
+
 
 class blogForm(forms.Form):
     titulo=forms.CharField(label="titulo",max_length=50)

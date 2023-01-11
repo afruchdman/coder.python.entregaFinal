@@ -4,4 +4,4 @@ from .models import *
 
 admin.site.register(pages)
 admin.site.register(blogs)
-admin.site.register(Avatar)
+#admin.site.register(Imagen)

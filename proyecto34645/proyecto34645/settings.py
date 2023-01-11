@@ -9,11 +9,14 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import os
+import tempfile
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+#BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -38,6 +41,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "AppBlog",    
+    "ckeditor",
+    "ckeditor_uploader"
+    
 ]
 
 MIDDLEWARE = [
@@ -105,10 +111,7 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = "static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -117,6 +120,99 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 ########################## Agregado ale ##############################################
 LOGIN_URL='/AppBlog/login/'
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-MEDIA_URL = '/media/'
+STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / 'static'
+MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+DEFAULT_CONFIG = {
+    "skin": "moono-lisa",
+    "toolbar_Basic": [["Source", "-", "Bold", "Italic"]],
+    "toolbar_Full": [
+        [
+            "Styles",
+            "Format",
+            "Bold",
+            "Italic",
+            "Underline",
+            "Strike",
+            "SpellChecker",
+            "Undo",
+            "Redo",
+        ],
+        ["Link", "Unlink", "Anchor"],
+        ["Image", "Flash", "Table", "HorizontalRule"],
+        ["TextColor", "BGColor"],
+        ["Smiley", "SpecialChar"],
+        ["Source"],
+    ],
+    "toolbar": "Full",
+    "height": 291,
+    "width": 835,
+    "filebrowserWindowWidth": 940,
+    "filebrowserWindowHeight": 725,
+}
+CUSTOM_TOOLBAR = [
+    {
+        "name": "document",
+        "items": [
+            "Styles",
+            "Format",
+            "Bold",
+            "Italic",
+            "Underline",
+            "Strike",
+            "-",
+            "TextColor",
+            "BGColor",
+            "-",
+            "JustifyLeft",
+            "JustifyCenter",
+            "JustifyRight",
+            "JustifyBlock",
+        ],
+    },
+    {
+        "name": "widgets",
+        "items": [
+            "Undo",
+            "Redo",
+            "-",
+            "NumberedList",
+            "BulletedList",
+            "-",
+            "Outdent",
+            "Indent",
+            "-",
+            "Link",
+            "Unlink",
+            "-",
+            "Image",
+            "CodeSnippet",
+            "Table",
+            "HorizontalRule",
+            "Smiley",
+            "SpecialChar",
+            "-",
+            "Blockquote",
+            "-",
+            "ShowBlocks",
+            "Maximize",
+        ],
+    },
+]
+
+CKEDITOR_CONFIGS = {
+    "default": DEFAULT_CONFIG,
+    "my-custom-toolbar": {
+        "skin": "moono-lisa",
+        "toolbar": CUSTOM_TOOLBAR,
+        "toolbarGroups": None,
+        "extraPlugins": ",".join(["image2", "codesnippet"]),
+        "removePlugins": ",".join(["image"]),
+        "codeSnippet_theme": "xcode",
+    },
+}
